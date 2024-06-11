@@ -1,6 +1,6 @@
 from sanic import HTTPResponse, SanicException, json
 
-from ...common import BlueprintRequest
+from ...common import BlueprintRequest, formatted_reply
 
 class AuthHandlers:
     async def sign_in(self, request: BlueprintRequest) -> HTTPResponse:
@@ -8,4 +8,4 @@ class AuthHandlers:
         if not user:
             raise SanicException("User Not Found")
         else:
-            return json(request.json)
+            return json(formatted_reply(datum=request.json))
