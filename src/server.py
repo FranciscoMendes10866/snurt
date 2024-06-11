@@ -17,8 +17,7 @@ async def initial_setup(instance: AppInstance):
 async def clean_up(instance: AppInstance):
     await instance.ctx.db.disconnect()
 
-merged_routers = Blueprint.group(auth_router, url_prefix="/api")
-app.blueprint(merged_routers)
+app.blueprint(Blueprint.group(auth_router, url_prefix="/api"))
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3333, workers=2, debug=True)
+    app.run(host="0.0.0.0", port=3333, workers=1, debug=True)
