@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "learn-sanic"
+version = "0.1.0"
+description = ""
+authors = ["_.fmendes._ <fmendes_dev@protonmail.ch>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+sanic = "^23.12.1"
+pydash = "^8.0.1"
+setuptools = "^70.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
