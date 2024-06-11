@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "learn-sanic"
+name = "snurt"
 version = "0.1.0"
 description = ""
 authors = ["_.fmendes._ <fmendes_dev@protonmail.ch>"]
@@ -10,6 +10,8 @@ python = "^3.12"
 sanic = "^23.12.1"
 pydash = "^8.0.1"
 setuptools = "^70.0.0"
+prisma = "^0.13.1"
+asyncio = "^3.4.3"
 
 
 [build-system]
