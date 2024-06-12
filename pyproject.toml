@@ -8,11 +8,11 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 sanic = "^23.12.1"
-pydash = "^8.0.1"
 setuptools = "^70.0.0"
 prisma = "^0.13.1"
 asyncio = "^3.4.3"
 pyjwt = "^2.8.0"
+python-decouple = "^3.8"
 
 
 [build-system]

@@ -1,8 +1,15 @@
 from sanic import Sanic, Blueprint
 from prisma import Prisma
+from decouple import config
+from typing import cast
 
 from .domain.auth.router import auth_router
 from .common import error_handler, db
+
+API_HOST = cast(str, config("API_HOST", default="0.0.0.0"))
+API_PORT = cast(int, config("API_PORT", default=3333))
+API_WORKERS = cast(int, config('API_WORKERS', default=1))
+API_DEBUG = cast(bool, config('API_DEBUG', default=False))
 
 app = Sanic(name="snurt")
 app.error_handler.add(Exception, error_handler)
@@ -18,4 +25,4 @@ async def clean_up(self: Sanic):
 app.blueprint(Blueprint.group(auth_router, url_prefix="/api"))
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3333, workers=1, debug=True)
+    app.run(host=API_HOST, port=API_PORT, workers=API_WORKERS, debug=API_DEBUG)

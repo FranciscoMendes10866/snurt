@@ -1,6 +1,7 @@
 from prisma import Prisma
 from sanic import Request, json
 from typing import Any, Optional, TypedDict, cast
+from decouple import config
 import datetime
 import jwt
 import time
@@ -28,15 +29,17 @@ class JwtPayload(TypedDict):
     user_id: str
     exp: Optional[datetime.datetime]
 
+JWT_SECRET = cast(str, config("JWT_SECRET", default="secret"))
+
 # Sign Json Web Token
 def sign_jwt(payload: JwtPayload) -> str:
     payload["exp"] = datetime.datetime.utcnow() + datetime.timedelta(minutes=15)
-    return jwt.encode(payload=cast(dict[str, Any], payload), key="SECRET", algorithm="HS256")
+    return jwt.encode(payload=cast(dict[str, Any], payload), key=JWT_SECRET, algorithm="HS256")
 
 # Decode Json Web Token
 def decode_jwt(token: str) -> JwtPayload | None:
     try:
-        return jwt.decode(jwt=token, key="SECRET", algorithms=["HS256"])
+        return jwt.decode(jwt=token, key=JWT_SECRET, algorithms=["HS256"])
     except:
         return None
 

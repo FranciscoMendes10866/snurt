@@ -549,23 +549,6 @@ files = [
 typing-extensions = ">=4.6.0,<4.7.0 || >4.7.0"
 
 [[package]]
-name = "pydash"
-version = "8.0.1"
-description = "The kitchen sink of Python utility libraries for doing \"stuff\" in a functional way. Based on the Lo-Dash Javascript library."
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "pydash-8.0.1-py3-none-any.whl", hash = "sha256:60265bab97fd00d5afd27dfbff9b6abfa22d0a965e166476b9066d84cd44c940"},
-    {file = "pydash-8.0.1.tar.gz", hash = "sha256:a24619643d3c054bfd56a9ae1cb7bd00e9774eaf369d7bb8d62b3daa2462bdbd"},
-]
-
-[package.dependencies]
-typing-extensions = ">3.10,<4.6.0 || >4.6.0"
-
-[package.extras]
-dev = ["build", "coverage", "furo", "invoke", "mypy", "pytest", "pytest-cov", "pytest-mypy-testing", "ruff", "sphinx", "sphinx-autodoc-typehints", "tox", "twine", "wheel"]
-
-[[package]]
 name = "pyjwt"
 version = "2.8.0"
 description = "JSON Web Token implementation in Python"
@@ -581,6 +564,17 @@ crypto = ["cryptography (>=3.4.0)"]
 dev = ["coverage[toml] (==5.0.4)", "cryptography (>=3.4.0)", "pre-commit", "pytest (>=6.0.0,<7.0.0)", "sphinx (>=4.5.0,<5.0.0)", "sphinx-rtd-theme", "zope.interface"]
 docs = ["sphinx (>=4.5.0,<5.0.0)", "sphinx-rtd-theme", "zope.interface"]
 tests = ["coverage[toml] (==5.0.4)", "pytest (>=6.0.0,<7.0.0)"]
+
+[[package]]
+name = "python-decouple"
+version = "3.8"
+description = "Strict separation of settings from code."
+optional = false
+python-versions = "*"
+files = [
+    {file = "python-decouple-3.8.tar.gz", hash = "sha256:ba6e2657d4f376ecc46f77a3a615e058d93ba5e465c01bbe57289bfb7cce680f"},
+    {file = "python_decouple-3.8-py3-none-any.whl", hash = "sha256:d0d45340815b25f4de59c974b855bb38d03151d81b037d9e3f463b0c9f8cbd66"},
+]
 
 [[package]]
 name = "python-dotenv"
@@ -915,4 +909,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "0b8164a756f0c014af7ca64044d9f78371e666d87ceb6b52b0fa90aecd47a353"
+content-hash = "da1a4530bf1b79a64f1f00c3a4bee49d941b7cb1ba26bad2a20dc171388b532d"
