@@ -1,3 +1,5 @@
+*.db
+
 ### LSP config files
 # pyrightconfig.json -> commented this out so that I don't need to remember it
 

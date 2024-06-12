@@ -5,6 +5,7 @@ from decouple import config
 import datetime
 import jwt
 import time
+import bcrypt
 
 # Database Client
 db = Prisma()
@@ -53,3 +54,13 @@ def create_session() -> float:
 def verify_session(session: float) -> bool:
     current_time = time.time()
     return current_time > session
+
+# Hash password
+def hash_password(text: str) -> str:
+    salt = bcrypt.gensalt()
+    bytes = bcrypt.hashpw(text.encode("utf-8"), salt)
+    return bytes.decode("utf-8")
+
+# Compare password with hash
+def verify_password(text: str, hashed: str) -> bool:
+    return bcrypt.checkpw(text.encode("utf-8"), hashed.encode("utf-8"))
