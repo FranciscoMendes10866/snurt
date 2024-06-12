@@ -12,6 +12,7 @@ pydash = "^8.0.1"
 setuptools = "^70.0.0"
 prisma = "^0.13.1"
 asyncio = "^3.4.3"
+pyjwt = "^2.8.0"
 
 
 [build-system]
