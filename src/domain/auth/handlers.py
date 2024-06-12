@@ -81,6 +81,7 @@ class AuthHandlers:
         if not session_id:
             raise BadRequest()
 
+        # TODO: protect route and make sure that only the session owner can delete it
         await self.__repo.delete_session_by_id(session_id)
 
         return json(formatted_reply())

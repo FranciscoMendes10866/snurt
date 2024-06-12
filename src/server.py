@@ -1,5 +1,4 @@
 from sanic import Sanic, Blueprint
-from prisma import Prisma
 from decouple import config
 from typing import cast
 

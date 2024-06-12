@@ -1,6 +1,6 @@
 from prisma import Prisma
 from sanic import Request, json
-from typing import Any, Optional, TypedDict, cast
+from typing import Any, TypedDict, cast
 from decouple import config
 import datetime
 import jwt
