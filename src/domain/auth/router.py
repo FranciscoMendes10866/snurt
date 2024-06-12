@@ -1,4 +1,5 @@
 from sanic import Blueprint
+
 from .handlers import AuthHandlers
 
 auth_router = Blueprint(name="auth_router", url_prefix="/auth")

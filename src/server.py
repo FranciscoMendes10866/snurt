@@ -2,20 +2,18 @@ from sanic import Sanic, Blueprint
 from prisma import Prisma
 
 from .domain.auth.router import auth_router
-from .common import AppContext, error_handler, AppInstance
+from .common import error_handler, db
 
-app = Sanic(name="snurt", ctx=AppContext)
+app = Sanic(name="snurt")
 app.error_handler.add(Exception, error_handler)
 
 @app.before_server_start
-async def initial_setup(instance: AppInstance):
-    db = Prisma()
+async def initial_setup(self: Sanic):
     await db.connect()
-    instance.ctx.db = db
 
 @app.before_server_stop
-async def clean_up(instance: AppInstance):
-    await instance.ctx.db.disconnect()
+async def clean_up(self: Sanic):
+    await db.disconnect()
 
 app.blueprint(Blueprint.group(auth_router, url_prefix="/api"))
 
