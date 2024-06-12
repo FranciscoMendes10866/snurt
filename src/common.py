@@ -26,15 +26,15 @@ async def error_handler(request: Request, exception: Exception):
     )
 
 class JwtPayload(TypedDict):
-    user_id: str
-    exp: Optional[datetime.datetime]
+    user_id: int
 
 JWT_SECRET = cast(str, config("JWT_SECRET", default="secret"))
 
 # Sign Json Web Token
 def sign_jwt(payload: JwtPayload) -> str:
-    payload["exp"] = datetime.datetime.utcnow() + datetime.timedelta(minutes=15)
-    return jwt.encode(payload=cast(dict[str, Any], payload), key=JWT_SECRET, algorithm="HS256")
+    datum = cast(dict[str, Any], payload)
+    datum["exp"] = datetime.datetime.utcnow() + datetime.timedelta(minutes=15)
+    return jwt.encode(payload=datum, key=JWT_SECRET, algorithm="HS256")
 
 # Decode Json Web Token
 def decode_jwt(token: str) -> JwtPayload | None:
