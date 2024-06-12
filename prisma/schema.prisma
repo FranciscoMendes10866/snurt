@@ -6,13 +6,23 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:snurt.db"
+  url      = "file:../snurt.db"
 }
 
 model User {
-  id         String   @id @default(cuid())
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id         Int        @id @default(autoincrement())
   email      String
   password   String
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
+  sessions   Sessions[]
+}
+
+model Sessions {
+  id         Int      @id @default(autoincrement())
+  expires_at Int
+  User       User     @relation(fields: [user_id], references: [id])
+  user_id    Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
