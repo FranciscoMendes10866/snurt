@@ -22,12 +22,15 @@ class AuthHandlers:
         hashed_password = hash_password(password)
         user_record = await self.__repo.insert_user(email=email, password=hashed_password)
 
+        access_token = sign_jwt(user_record.id)
+        if not access_token:
+            raise ServerError()
+
         expires_at = create_session()
         user_session = await self.__repo.create_new_session(expires_at, user_record.id)
-        access_token = sign_jwt(user_record.id)
 
         return json(
-            formatted_reply(datum={"session": user_session.id, "access_token": access_token})
+            formatted_reply(datum={"access_token": access_token, "session": user_session.id})
         )
 
 
@@ -45,12 +48,15 @@ class AuthHandlers:
         if not is_valid:
             raise ServerError("Invalid credentials")
 
+        access_token = sign_jwt(user.id)
+        if not access_token:
+            raise ServerError()
+
         expires_at = create_session()
         user_session = await self.__repo.create_new_session(expires_at, user.id)
-        access_token = sign_jwt(user.id)
 
         return json(
-            formatted_reply(datum={"session": user_session.id, "access_token": access_token})
+            formatted_reply(datum={"access_token": access_token, "session": user_session.id})
         )
 
     async def renew_session(self, request: Request) -> HTTPResponse:
@@ -68,12 +74,15 @@ class AuthHandlers:
         if is_expired:
             raise Forbidden()
 
+        access_token = sign_jwt(session.user_id)
+        if not access_token:
+            raise ServerError()
+
         expires_at = create_session()
         user_session = await self.__repo.create_new_session(expires_at, session.user_id)
-        access_token = sign_jwt(session.user_id)
 
         return json(
-            formatted_reply(datum={"session": user_session.id, "access_token": access_token})
+            formatted_reply(datum={"access_token": access_token, "session": user_session.id})
         )
 
     async def sign_out(self, request: Request) -> HTTPResponse:

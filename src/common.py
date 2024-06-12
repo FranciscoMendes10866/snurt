@@ -36,7 +36,7 @@ class JwtPayload(TypedDict):
 JWT_SECRET = cast(str, config("JWT_SECRET", default="secret"))
 
 # Sign Json Web Token
-def sign_jwt(user_id: int) -> str:
+def sign_jwt(user_id: int) -> str | None:
     claims = {
         "iss": "snurt",
         "aud": "user",
@@ -44,7 +44,10 @@ def sign_jwt(user_id: int) -> str:
         "iat": datetime.datetime.utcnow().timestamp(),
         "exp": (datetime.datetime.utcnow() + datetime.timedelta(minutes=15)).timestamp()
     }
-    return jwt.encode(payload=claims, key=JWT_SECRET, algorithm="HS256")
+    try:
+        return jwt.encode(payload=claims, key=JWT_SECRET, algorithm="HS256")
+    except:
+        return None
 
 # Decode Json Web Token
 def decode_jwt(token: str) -> JwtPayload | None:
