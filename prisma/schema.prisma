@@ -20,7 +20,7 @@ model User {
 
 model Sessions {
   id         Int      @id @default(autoincrement())
-  expires_at Int
+  expires_at Float
   User       User     @relation(fields: [user_id], references: [id])
   user_id    Int
   created_at DateTime @default(now())
