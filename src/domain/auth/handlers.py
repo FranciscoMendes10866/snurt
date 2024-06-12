@@ -24,7 +24,7 @@ class AuthHandlers:
 
         expires_at = create_session()
         user_session = await self.__repo.create_new_session(expires_at, user_record.id)
-        access_token = sign_jwt({ "user_id": user_record.id })
+        access_token = sign_jwt(user_record.id)
 
         return json(
             formatted_reply(datum={"session": user_session.id, "access_token": access_token})
@@ -47,7 +47,7 @@ class AuthHandlers:
 
         expires_at = create_session()
         user_session = await self.__repo.create_new_session(expires_at, user.id)
-        access_token = sign_jwt({ "user_id": user.id })
+        access_token = sign_jwt(user.id)
 
         return json(
             formatted_reply(datum={"session": user_session.id, "access_token": access_token})
@@ -70,7 +70,7 @@ class AuthHandlers:
 
         expires_at = create_session()
         user_session = await self.__repo.create_new_session(expires_at, session.user_id)
-        access_token = sign_jwt({ "user_id": session.user_id })
+        access_token = sign_jwt(session.user_id)
 
         return json(
             formatted_reply(datum={"session": user_session.id, "access_token": access_token})
