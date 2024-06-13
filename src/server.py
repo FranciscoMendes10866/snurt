@@ -3,7 +3,8 @@ from decouple import config
 from typing import cast
 
 from .domain.auth.router import auth_router
-from .common import error_handler, db
+from .middleware import error_handler
+from .common import db
 
 API_HOST = cast(str, config("API_HOST", default="0.0.0.0"))
 API_PORT = cast(int, config("API_PORT", default=3333))
